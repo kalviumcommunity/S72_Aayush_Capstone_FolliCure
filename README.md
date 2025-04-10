@@ -3,15 +3,66 @@ FolliCure is a personalized haircare web platform that uses user input and AI an
 
 The project aims to bridge the gap between generic haircare advice and truly personalized solutions.
 
-# 🗓️ Day-by-Day Capstone Plan (10-Day Timeline):
+# 📅 Week-by-Week Plan
 
-Day 1	Finalize project scope and feature list. Create wireframes and UI/UX design.
-Day 2	Set up development environment. Initialize frontend and backend projects.
-Day 3	Build the homepage and quiz interface (frontend).
-Day 4	Work on quiz logic, store user inputs. Design database schema.
-Day 5	Build backend for processing quiz data and integrating basic recommendation logic.
-Day 6	Integrate a basic ML model or rules engine for product recommendation.
-Day 7	Connect frontend and backend. Display personalized results dynamically.
-Day 8	Add product database, FAQs, and additional resources.
-Day 9	Testing, debugging, and refining UX/UI design.
-Day 10	Final presentation preparation – create demo video, slides, and documentation. Deploy project.
+# ✅ Week 1: Planning & Design
+
+Goal: Define the scope, gather inspiration, design the user experience.
+
+Research hair types, common concerns, and personalization strategies
+
+Define user personas and journey
+
+Sketch wireframes or mockups for:
+
+Homepage
+
+Hair quiz flow
+
+Results/recommendation page
+
+Optional: profile/dashboard
+
+Decide tech stack (React, Next.js, Node.js, Firebase, etc.)
+
+Set up GitHub repo and basic project structure
+
+# 🧱 Week 2: Core Development (Frontend + Backend Basics)
+
+Goal: Build the quiz and get the site structure functional.
+
+Build the homepage and navigation
+
+Implement quiz UI with dynamic questions
+
+Set up backend or local storage to handle quiz answers
+
+Create product database or dataset (can start as a JSON file or spreadsheet)
+
+Begin designing algorithm or logic for matching answers to product types
+
+# ⚙️ Week 3: Personalization Engine + Polish
+Goal: Make recommendations work and fine-tune UI/UX.
+
+Code logic or rules engine to generate haircare suggestions
+
+Optional: Add basic ML model for smarter matching
+
+Display personalized results with product images, routines, and care tips
+
+Add animations, transitions, and polish the visual design
+
+Test on mobile + desktop
+
+# 🚀 Week 4: Testing, Feedback & Deployment
+Goal: Prepare for launch and presentation.
+
+Conduct user testing and gather feedback
+
+Fix bugs, edge cases, and UI inconsistencies
+
+Write final documentation (README, how it works, etc.)
+
+Deploy to Vercel, Netlify, or another host
+
+Prepare a final presentation/demo video
