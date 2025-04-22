@@ -45,6 +45,7 @@ const SignUp = () => {
         if (data.alert) {
           setAlertMessage(data.alert);
           setShowAlert(true);
+          throw new Error(data.alert);
         }
         throw new Error(data.message || 'Registration failed');
       }
@@ -60,10 +61,10 @@ const SignUp = () => {
       setAlertMessage(data.alert || 'Registration successful! Welcome to FolliCure!');
       setShowAlert(true);
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/home');
       }, 2000);
     } catch (err) {
-      setError(err.message || 'Registration failed. Please try again.');
+      setError(err.message);
       console.error('Registration error:', err);
     }
   };

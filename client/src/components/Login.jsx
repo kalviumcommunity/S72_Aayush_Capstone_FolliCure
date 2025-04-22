@@ -38,7 +38,7 @@ const Login = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.alert || data.message || 'Login failed');
       }
 
       // Store user data
@@ -49,10 +49,10 @@ const Login = () => {
       }
 
       // Show success alert
-      alert('Login successful! Welcome back to FolliCure!');
-      navigate('/dashboard');
+      alert(data.alert || 'Login successful! Welcome back to FolliCure!');
+      navigate('/home');
     } catch (err) {
-      setError(err.message || 'Login failed. Please try again.');
+      setError(err.message);
       console.error('Login error:', err);
     }
   };
