@@ -1,1 +1,1 @@
-frontend deployment link: https://cftyhv.netlify.app/login
+frontend deployment link: https://cftyhv.netlify.app/
