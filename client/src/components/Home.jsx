@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userName, setUserName] = useState('User');
+
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      setUserName(user.name || 'User');
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -78,7 +87,7 @@ const Home = () => {
       <div className="relative z-10 flex min-h-screen">
         {/* Left Section */}
         <div className="w-1/2 p-16 flex flex-col justify-center">
-          <h1 className="text-5xl font-bold mb-4 text-gray-900">Welcome User!</h1>
+          <h1 className="text-5xl font-bold mb-4 text-gray-900">Welcome {userName}!</h1>
           <p className="text-xl text-gray-700 mb-8">Lets start your haircare journey</p>
           <button 
             className="w-fit px-8 py-3 bg-[#FFB5B5] text-gray-800 rounded-lg hover:bg-[#FF9B9B] transition-all duration-200 font-medium"

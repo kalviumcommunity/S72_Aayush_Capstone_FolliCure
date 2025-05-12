@@ -20,18 +20,15 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      family: 4,
-      ssl: true,
-      tls: true,
-      tlsAllowInvalidCertificates: true,
-      tlsAllowInvalidHostnames: true
+      family: 4
     };
 
-    await mongoose.connect(process.env.MONGODB_URI, options);
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/follicure', options);
     console.log('MongoDB Connected');
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
-    process.exit(1);
+    // Don't exit the process, just log the error
+    console.log('Server will continue running without database connection');
   }
 };
 
@@ -39,6 +36,10 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
+app.get('/', (req, res) => {
+  res.json({ message: 'Server is running' });
+});
+
 app.use('/api', authRoutes);
 
 const PORT = process.env.PORT || 5001;
