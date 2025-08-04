@@ -6,6 +6,9 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [scalpPhoto, setScalpPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoSubmitted, setPhotoSubmitted] = useState(false);
 
   const questions = [
     {
@@ -124,6 +127,26 @@ const Quiz = () => {
     }
   };
 
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setScalpPhoto(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPhotoPreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePhotoSubmit = () => {
+    if (scalpPhoto) {
+      setPhotoSubmitted(true);
+      console.log('Scalp photo submitted for analysis:', scalpPhoto);
+      // Here you would typically send the photo to your backend for AI analysis
+    }
+  };
+
   const getResults = () => {
     const hairType = answers[0];
     const scalpType = answers[1];
@@ -163,6 +186,9 @@ const Quiz = () => {
     // Save quiz results to localStorage or Firebase
     localStorage.setItem('quizCompleted', 'true');
     localStorage.setItem('quizResults', JSON.stringify(answers));
+    if (scalpPhoto) {
+      localStorage.setItem('scalpPhotoSubmitted', 'true');
+    }
     
     // Redirect to home page
     navigate('/home');
@@ -199,6 +225,65 @@ const Quiz = () => {
               <p className="text-lg text-red-600 font-semibold">
                 {product}
               </p>
+            </div>
+
+            {/* Scalp Photo Upload */}
+            <div className="w-full text-center space-y-4">
+              <h3 className="text-lg font-semibold text-gray-800">Scalp Analysis (Optional)</h3>
+              <p className="text-sm text-gray-600">
+                Upload a clear photo of your scalp for AI-powered analysis
+              </p>
+              
+              {!photoPreview ? (
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    id="scalp-photo-upload"
+                    onChange={handlePhotoUpload}
+                  />
+                  <label
+                    htmlFor="scalp-photo-upload"
+                    className="inline-block bg-gray-100 text-gray-700 py-3 px-6 rounded-lg border border-gray-300 cursor-pointer hover:bg-gray-200 transition-colors"
+                  >
+                    📸 Upload Scalp Photo
+                  </label>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="relative">
+                    <img 
+                      src={photoPreview} 
+                      alt="Scalp preview" 
+                      className="w-64 h-48 object-cover rounded-lg border border-gray-300 mx-auto"
+                    />
+                    <button
+                      onClick={() => {
+                        setScalpPhoto(null);
+                        setPhotoPreview(null);
+                        setPhotoSubmitted(false);
+                      }}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  
+                  {!photoSubmitted ? (
+                    <button
+                      onClick={handlePhotoSubmit}
+                      className="bg-red-500 text-white py-2 px-6 rounded-lg font-medium hover:bg-red-600 transition-colors"
+                    >
+                      Submit for Analysis
+                    </button>
+                  ) : (
+                    <div className="text-green-600 font-medium">
+                      ✅ Photo submitted for AI analysis
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Discount Code */}
